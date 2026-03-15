@@ -26,8 +26,16 @@ export const Services: CollectionConfig = {
       hooks: {
         beforeValidate: [
           ({ value, data }) => {
-            if (value) return value.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
-            if (data?.title) return data.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
+            if (value)
+              return value
+                .toLowerCase()
+                .replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '')
+            if (data?.title)
+              return data.title
+                .toLowerCase()
+                .replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '')
             return value
           },
         ],
