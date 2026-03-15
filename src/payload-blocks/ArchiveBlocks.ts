@@ -37,8 +37,24 @@ export const ContentGrid: Block = {
       type: 'text',
     },
     {
+      name: 'populateFrom',
+      type: 'select',
+      defaultValue: 'manual',
+      options: [
+        { label: 'Manual Input', value: 'manual' },
+        { label: 'Services Collection', value: 'services' },
+      ],
+      admin: {
+        description:
+          'Choose whether to manually input items or pull them automatically from Services.',
+      },
+    },
+    {
       name: 'items',
       type: 'array',
+      admin: {
+        condition: (_, siblingData) => siblingData.populateFrom === 'manual',
+      },
       fields: [
         {
           name: 'title',

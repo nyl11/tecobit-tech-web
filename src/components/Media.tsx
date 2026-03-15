@@ -21,6 +21,9 @@ export const Media: React.FC<MediaProps> = ({ resource, imgClassName, priority =
 
   // Payload's local API might return a full URL or relative URL. 
   // If absolute, next/image expects it in domains config. If relative, standard next/image works.
+  // If the resource is just a Mongo ID (string without a slash), don't render it directly
+  if (isString && !url.includes('/')) return null;
+
   const src = url.startsWith('http') ? url : url;
 
   return (
