@@ -1,0 +1,86 @@
+import type { Block } from 'payload'
+
+export const Hero: Block = {
+  slug: 'hero',
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'subtitle',
+      type: 'textarea',
+    },
+    {
+      name: 'backgroundImage',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+    },
+    {
+      name: 'ctaLabel',
+      type: 'text',
+    },
+    {
+      name: 'ctaLink',
+      type: 'text',
+    },
+  ],
+}
+
+export const ContentGrid: Block = {
+  slug: 'contentGrid',
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+    },
+    {
+      name: 'items',
+      type: 'array',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'content',
+          type: 'textarea',
+          required: true,
+        },
+        {
+          name: 'icon',
+          type: 'upload',
+          relationTo: 'media',
+        },
+      ],
+    },
+  ],
+}
+
+export const CTA: Block = {
+  slug: 'cta',
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+    },
+    {
+      name: 'buttonLabel',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'buttonLink',
+      type: 'text',
+      required: true,
+    },
+  ],
+}
