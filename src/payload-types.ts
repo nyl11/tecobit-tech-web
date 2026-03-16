@@ -73,6 +73,7 @@ export interface Config {
     services: Service;
     portfolio: Portfolio;
     'contact-submissions': ContactSubmission;
+    'team-members': TeamMember;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     services: ServicesSelect<false> | ServicesSelect<true>;
     portfolio: PortfolioSelect<false> | PortfolioSelect<true>;
     'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
+    'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -235,6 +237,55 @@ export interface Page {
         blockName?: string | null;
         blockType: 'cta';
       }
+    | {
+        title?: string | null;
+        address: string;
+        zoom?: number | null;
+        /**
+         * Height of the map (e.g., 450px, 60vh)
+         */
+        height?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'map';
+      }
+    | {
+        title: string;
+        subtitle?: string | null;
+        /**
+         * Choose whether to manually select members or pull all from the Team collection.
+         */
+        populateFrom?: ('manual' | 'team') | null;
+        members?:
+          | {
+              name: string;
+              position: string;
+              image: string | Media;
+              socialLinks?:
+                | {
+                    platform: 'linkedin' | 'github' | 'twitter' | 'facebook' | 'instagram';
+                    url: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'team';
+      }
+    | {
+        eyebrow?: string | null;
+        title: string;
+        subtitle?: string | null;
+        theme?: ('slate' | 'white' | 'light') | null;
+        align?: ('left' | 'center') | null;
+        showBlur?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'pageHero';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -310,6 +361,26 @@ export interface ContactSubmission {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members".
+ */
+export interface TeamMember {
+  id: string;
+  name: string;
+  position: string;
+  socialLinks?:
+    | {
+        platform: 'linkedin' | 'github' | 'twitter' | 'facebook' | 'instagram';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  bio?: string | null;
+  image?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -355,6 +426,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-submissions';
         value: string | ContactSubmission;
+      } | null)
+    | ({
+        relationTo: 'team-members';
+        value: string | TeamMember;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -500,6 +575,52 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        map?:
+          | T
+          | {
+              title?: T;
+              address?: T;
+              zoom?: T;
+              height?: T;
+              id?: T;
+              blockName?: T;
+            };
+        team?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              populateFrom?: T;
+              members?:
+                | T
+                | {
+                    name?: T;
+                    position?: T;
+                    image?: T;
+                    socialLinks?:
+                      | T
+                      | {
+                          platform?: T;
+                          url?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        pageHero?:
+          | T
+          | {
+              eyebrow?: T;
+              title?: T;
+              subtitle?: T;
+              theme?: T;
+              align?: T;
+              showBlur?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -539,6 +660,25 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
   email?: T;
   serviceNeeded?: T;
   message?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members_select".
+ */
+export interface TeamMembersSelect<T extends boolean = true> {
+  name?: T;
+  position?: T;
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
+  bio?: T;
+  image?: T;
   updatedAt?: T;
   createdAt?: T;
 }

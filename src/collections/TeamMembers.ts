@@ -17,10 +17,38 @@ export const TeamMembers: CollectionConfig = {
       required: true,
     },
     {
+      name: 'socialLinks',
+      type: 'array',
+      fields: [
+        {
+          name: 'platform',
+          type: 'select',
+          options: [
+            { label: 'LinkedIn', value: 'linkedin' },
+            { label: 'GitHub', value: 'github' },
+            { label: 'Twitter', value: 'twitter' },
+            { label: 'Facebook', value: 'facebook' },
+            { label: 'Instagram', value: 'instagram' },
+          ],
+          required: true,
+        },
+        {
+          name: 'url',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'bio',
+      type: 'text',
+      required: false,
+    },
+    {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      required: false,
     },
   ],
 }
