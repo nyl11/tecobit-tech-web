@@ -201,6 +201,10 @@ export interface Page {
       }
     | {
         title?: string | null;
+        /**
+         * Choose whether to manually input items or pull them automatically from Services.
+         */
+        populateFrom?: ('manual' | 'services') | null;
         items?:
           | {
               title: string;
@@ -477,6 +481,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
+              populateFrom?: T;
               items?:
                 | T
                 | {
