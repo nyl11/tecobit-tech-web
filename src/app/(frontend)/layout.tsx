@@ -35,7 +35,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="flex flex-col min-h-screen antialiased bg-background text-body font-sans">
         <Header headerData={headerData} siteSettings={siteSettings} />
-        <main className="flex-grow">{children}</main>
+        <main className="grow">{children}</main>
         <Footer footerData={footerData} siteSettings={siteSettings} />
       </body>
     </html>
