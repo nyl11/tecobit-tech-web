@@ -100,3 +100,31 @@ export const CTA: Block = {
     },
   ],
 }
+
+export const Stats: Block = {
+  slug: 'stats',
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+    },
+    {
+      name: 'stats',
+      type: 'array',
+      required: true,
+      minRows: 1,
+      fields: [
+        {
+          name: 'value',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'label',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+  ],
+}

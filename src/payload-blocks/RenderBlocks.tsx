@@ -2,6 +2,7 @@ import React from 'react'
 import { HeroBlock } from './HeroBlock'
 import { ContentGridBlock } from './ContentGridBlock'
 import { CtaBlock } from './CtaBlock'
+import { CompanyStatsBlock } from './CompanyStatsBlock'
 import type { Page } from '@/payload-types'
 
 export const RenderBlocks = ({ layout }: { layout: Page['layout'] }) => {
@@ -15,6 +16,8 @@ export const RenderBlocks = ({ layout }: { layout: Page['layout'] }) => {
             return <HeroBlock key={index} {...block} />
           case 'contentGrid':
             return <ContentGridBlock key={index} {...block} />
+          case 'stats':
+            return <CompanyStatsBlock key={index} {...block} />
           case 'cta':
             return <CtaBlock key={index} {...block} />
           default:
