@@ -73,7 +73,7 @@ export interface Config {
     services: Service;
     portfolio: Portfolio;
     'contact-submissions': ContactSubmission;
-    'company-stats': CompanyStat;
+    'team-members': TeamMember;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -87,7 +87,7 @@ export interface Config {
     services: ServicesSelect<false> | ServicesSelect<true>;
     portfolio: PortfolioSelect<false> | PortfolioSelect<true>;
     'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
-    'company-stats': CompanyStatsSelect<false> | CompanyStatsSelect<true>;
+    'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -218,6 +218,17 @@ export interface Page {
         blockType: 'contentGrid';
       }
     | {
+        title?: string | null;
+        stats: {
+          value: string;
+          label: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'stats';
+      }
+    | {
         title: string;
         description?: string | null;
         buttonLabel: string;
@@ -225,6 +236,55 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'cta';
+      }
+    | {
+        title?: string | null;
+        address: string;
+        zoom?: number | null;
+        /**
+         * Height of the map (e.g., 450px, 60vh)
+         */
+        height?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'map';
+      }
+    | {
+        title: string;
+        subtitle?: string | null;
+        /**
+         * Choose whether to manually select members or pull all from the Team collection.
+         */
+        populateFrom?: ('manual' | 'team') | null;
+        members?:
+          | {
+              name: string;
+              position: string;
+              image: string | Media;
+              socialLinks?:
+                | {
+                    platform: 'linkedin' | 'github' | 'twitter' | 'facebook' | 'instagram';
+                    url: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'team';
+      }
+    | {
+        eyebrow?: string | null;
+        title: string;
+        subtitle?: string | null;
+        theme?: ('slate' | 'white' | 'light') | null;
+        align?: ('left' | 'center') | null;
+        showBlur?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'pageHero';
       }
   )[];
   updatedAt: string;
@@ -301,23 +361,21 @@ export interface ContactSubmission {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "company-stats".
+ * via the `definition` "team-members".
  */
-export interface CompanyStat {
+export interface TeamMember {
   id: string;
-  /**
-   * e.g., "Happy Clients" or "Projects Completed"
-   */
-  label: string;
-  /**
-   * e.g., "50+", "10M", "100%"
-   */
-  value: string;
-  icon?: (string | null) | Media;
-  /**
-   * Controls the order they appear on the frontend (lower numbers appear first)
-   */
-  displayOrder?: number | null;
+  name: string;
+  position: string;
+  bio?: string | null;
+  image: string | Media;
+  socialLinks?:
+    | {
+        platform: 'linkedin' | 'github' | 'twitter' | 'facebook' | 'instagram';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -370,8 +428,8 @@ export interface PayloadLockedDocument {
         value: string | ContactSubmission;
       } | null)
     | ({
-        relationTo: 'company-stats';
-        value: string | CompanyStat;
+        relationTo: 'team-members';
+        value: string | TeamMember;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -493,6 +551,20 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        stats?:
+          | T
+          | {
+              title?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         cta?:
           | T
           | {
@@ -500,6 +572,52 @@ export interface PagesSelect<T extends boolean = true> {
               description?: T;
               buttonLabel?: T;
               buttonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        map?:
+          | T
+          | {
+              title?: T;
+              address?: T;
+              zoom?: T;
+              height?: T;
+              id?: T;
+              blockName?: T;
+            };
+        team?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              populateFrom?: T;
+              members?:
+                | T
+                | {
+                    name?: T;
+                    position?: T;
+                    image?: T;
+                    socialLinks?:
+                      | T
+                      | {
+                          platform?: T;
+                          url?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        pageHero?:
+          | T
+          | {
+              eyebrow?: T;
+              title?: T;
+              subtitle?: T;
+              theme?: T;
+              align?: T;
+              showBlur?: T;
               id?: T;
               blockName?: T;
             };
@@ -547,13 +665,20 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "company-stats_select".
+ * via the `definition` "team-members_select".
  */
-export interface CompanyStatsSelect<T extends boolean = true> {
-  label?: T;
-  value?: T;
-  icon?: T;
-  displayOrder?: T;
+export interface TeamMembersSelect<T extends boolean = true> {
+  name?: T;
+  position?: T;
+  bio?: T;
+  image?: T;
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
