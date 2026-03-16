@@ -11,7 +11,6 @@ import { Pages } from './collections/Pages'
 import { Services } from './collections/Services'
 import { Portfolio } from './collections/Portfolio'
 import { ContactSubmissions } from './collections/ContactSubmissions'
-import { CompanyStats } from './collections/CompanyStats'
 
 import { SiteSettings } from './globals/SiteSettings'
 import { Header } from './globals/Header'
@@ -27,7 +26,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages, Services, Portfolio, ContactSubmissions, CompanyStats],
+  collections: [Users, Media, Pages, Services, Portfolio, ContactSubmissions],
   globals: [SiteSettings, Header, Footer],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

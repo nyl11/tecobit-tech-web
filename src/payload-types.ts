@@ -73,7 +73,6 @@ export interface Config {
     services: Service;
     portfolio: Portfolio;
     'contact-submissions': ContactSubmission;
-    'company-stats': CompanyStat;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -87,7 +86,6 @@ export interface Config {
     services: ServicesSelect<false> | ServicesSelect<true>;
     portfolio: PortfolioSelect<false> | PortfolioSelect<true>;
     'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
-    'company-stats': CompanyStatsSelect<false> | CompanyStatsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -218,6 +216,17 @@ export interface Page {
         blockType: 'contentGrid';
       }
     | {
+        title?: string | null;
+        stats: {
+          value: string;
+          label: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'stats';
+      }
+    | {
         title: string;
         description?: string | null;
         buttonLabel: string;
@@ -301,28 +310,6 @@ export interface ContactSubmission {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "company-stats".
- */
-export interface CompanyStat {
-  id: string;
-  /**
-   * e.g., "Happy Clients" or "Projects Completed"
-   */
-  label: string;
-  /**
-   * e.g., "50+", "10M", "100%"
-   */
-  value: string;
-  icon?: (string | null) | Media;
-  /**
-   * Controls the order they appear on the frontend (lower numbers appear first)
-   */
-  displayOrder?: number | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -368,10 +355,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-submissions';
         value: string | ContactSubmission;
-      } | null)
-    | ({
-        relationTo: 'company-stats';
-        value: string | CompanyStat;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -493,6 +476,20 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        stats?:
+          | T
+          | {
+              title?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         cta?:
           | T
           | {
@@ -542,18 +539,6 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
   email?: T;
   serviceNeeded?: T;
   message?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "company-stats_select".
- */
-export interface CompanyStatsSelect<T extends boolean = true> {
-  label?: T;
-  value?: T;
-  icon?: T;
-  displayOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
