@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { Hero, ContentGrid, CTA, Stats } from '../payload-blocks/ArchiveBlocks'
+import { Hero, ContentGrid, CTA, Stats, Map, Team, PageHero } from '../payload-blocks/ArchiveBlocks'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -45,7 +45,7 @@ export const Pages: CollectionConfig = {
     {
       name: 'layout',
       type: 'blocks',
-      blocks: [Hero, ContentGrid, Stats, CTA],
+      blocks: [Hero, ContentGrid, Stats, CTA, Map, Team, PageHero],
       required: true,
     },
   ],

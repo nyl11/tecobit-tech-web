@@ -2,6 +2,28 @@ import React from 'react'
 import Link from 'next/link'
 import { Media } from '@/components/Media'
 import type { SiteSetting, Footer as FooterGlobal } from '@/payload-types'
+import { 
+  Facebook, 
+  Twitter, 
+  Instagram, 
+  Linkedin, 
+  Github, 
+  Youtube, 
+  Globe,
+  MessageCircle
+} from 'lucide-react'
+
+const getSocialIcon = (platform: string) => {
+  const p = platform.toLowerCase()
+  if (p.includes('facebook')) return <Facebook size={20} />
+  if (p.includes('twitter') || p.includes('x')) return <Twitter size={20} />
+  if (p.includes('instagram')) return <Instagram size={20} />
+  if (p.includes('linkedin')) return <Linkedin size={20} />
+  if (p.includes('github')) return <Github size={20} />
+  if (p.includes('youtube')) return <Youtube size={20} />
+  if (p.includes('whatsapp')) return <MessageCircle size={20} />
+  return <Globe size={20} />
+}
 
 export const Footer = ({ footerData, siteSettings }: { footerData?: FooterGlobal | null, siteSettings?: SiteSetting | null }) => {
   const logo = siteSettings?.logo
@@ -81,15 +103,15 @@ export const Footer = ({ footerData, siteSettings }: { footerData?: FooterGlobal
             <h4 className="text-white font-heading font-semibold mb-6 uppercase tracking-wider text-sm">Follow Us</h4>
             <div className="flex gap-4">
               {footerData?.socialLinks?.map((social, i: number) => (
-                <a 
-                  key={i}
+                <a
+                  key={social.id || i}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-body/30 flex items-center justify-center hover:bg-primary-dark hover:-translate-y-1 transition-all text-white"
                   title={social.platform}
                 >
-                  <span className="text-xs font-medium">{social.platform.charAt(0)}</span>
+                  {getSocialIcon(social.platform)}
                 </a>
               ))}
             </div>
