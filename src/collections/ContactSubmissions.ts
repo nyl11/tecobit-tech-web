@@ -37,6 +37,13 @@ export const ContactSubmissions: CollectionConfig = {
       },
     },
     {
+      name: 'phone',
+      type: 'text',
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
       name: 'serviceNeeded',
       type: 'text',
       admin: {

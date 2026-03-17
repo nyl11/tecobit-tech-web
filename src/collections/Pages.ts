@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { Hero, ContentGrid, CTA, Stats, Map, Team, PageHero } from '../payload-blocks/ArchiveBlocks'
+import { Hero, ContentGrid, CTA, Stats, Map, Team, PageHero, SplitHero, Process, LogoStrip, EnhancedCTA } from '../payload-blocks/ArchiveBlocks'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -26,7 +26,7 @@ export const Pages: CollectionConfig = {
       },
       hooks: {
         beforeValidate: [
-          ({ value, data }) => {
+          ({ value, data }: { value?: string; data?: Record<string, string> }) => {
             if (value)
               return value
                 .toLowerCase()
@@ -45,7 +45,7 @@ export const Pages: CollectionConfig = {
     {
       name: 'layout',
       type: 'blocks',
-      blocks: [Hero, ContentGrid, Stats, CTA, Map, Team, PageHero],
+      blocks: [Hero, ContentGrid, Stats, CTA, Map, Team, PageHero, SplitHero, Process, LogoStrip, EnhancedCTA],
       required: true,
     },
   ],

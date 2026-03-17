@@ -30,6 +30,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   }
 }
 
+import { Reveal } from '@/components/Reveal'
+
 export default async function PortfolioDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
 
@@ -49,31 +51,38 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
         <Link href="/portfolio" className="text-primary hover:text-primary-dark font-medium mb-8 inline-flex items-center gap-2">
           <span>←</span> Back to Portfolio
         </Link>
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-heading mb-6">
-            {item.projectName}
-          </h1>
-          <div className="flex flex-wrap gap-4 items-center text-muted font-sans">
-            {item.client && (
-              <div className="bg-surface border border-border px-4 py-2 rounded-full text-sm">
-                <span className="font-semibold text-heading mr-2">Client:</span> {item.client}
-              </div>
-            )}
-            {categories && categories.length > 0 && (
-              <div className="bg-surface border border-border px-4 py-2 rounded-full text-sm">
-                <span className="font-semibold text-heading mr-2">Categories:</span> {categories.join(', ')}
-              </div>
-            )}
+        
+        <Reveal>
+          <div className="mb-12">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-heading mb-6">
+              {item.projectName}
+            </h1>
+            <div className="flex flex-wrap gap-4 items-center text-muted font-sans">
+              {item.client && (
+                <div className="bg-surface border border-border px-4 py-2 rounded-full text-sm">
+                  <span className="font-semibold text-heading mr-2">Client:</span> {item.client}
+                </div>
+              )}
+              {categories && categories.length > 0 && (
+                <div className="bg-surface border border-border px-4 py-2 rounded-full text-sm">
+                  <span className="font-semibold text-heading mr-2">Categories:</span> {categories.join(', ')}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="rounded-2xl overflow-hidden mb-16 shadow-lg border border-border">
-          <Media resource={item.featuredImage} imgClassName="w-full object-cover max-h-[70vh]" priority />
-        </div>
+        <Reveal delay={200}>
+          <div className="rounded-2xl overflow-hidden mb-16 shadow-lg border border-border">
+            <Media resource={item.featuredImage} imgClassName="w-full object-cover max-h-[70vh]" priority />
+          </div>
+        </Reveal>
 
-        <div className="bg-surface rounded-2xl p-8 md:p-12 border border-border shadow-sm max-w-4xl mx-auto">
-          <RichText data={item.projectDetails} />
-        </div>
+        <Reveal delay={400}>
+          <div className="bg-surface rounded-2xl p-8 md:p-12 border border-border shadow-sm max-w-4xl mx-auto">
+            <RichText data={item.projectDetails} />
+          </div>
+        </Reveal>
       </div>
     </div>
   )

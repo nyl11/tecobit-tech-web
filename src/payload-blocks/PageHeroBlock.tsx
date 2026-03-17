@@ -33,19 +33,19 @@ export const PageHeroBlock: React.FC<PageHeroProps> = ({
         <div className={`max-w-4xl ${isCentered ? 'mx-auto text-center' : 'text-left'}`}>
           {/* Eyebrow / Badge */}
           {eyebrow && (
-            <span className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider uppercase bg-muted/10 rounded-full animate-fade-in-up">
+            <span className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider uppercase bg-muted/10 rounded-full">
               {eyebrow}
             </span>
           )}
           
-          <h1 className={`text-4xl md:text-6xl lg:text-7xl font-heading font-black leading-[1.1] mb-8 animate-fade-in-up delay-100 ${
+          <h1 className={`text-4xl md:text-6xl lg:text-7xl font-heading font-black leading-[1.1] mb-8 ${
             theme === 'slate' ? 'text-white' : 'text-heading'
           }`}>
             {title}
           </h1>
           
           {subtitle && (
-            <p className={`text-lg md:text-xl leading-relaxed max-w-2xl animate-fade-in-up delay-200 ${
+            <p className={`text-lg md:text-xl leading-relaxed max-w-2xl ${
               isCentered ? 'mx-auto' : ''
             } ${
               theme === 'slate' ? 'text-surface-alt/90' : 'text-body'

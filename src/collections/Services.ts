@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { Hero, ContentGrid, CTA, Stats, Map, Team, PageHero as PageHeroBlock, SplitHero, Process, LogoStrip, EnhancedCTA } from '../payload-blocks/ArchiveBlocks'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -25,7 +26,7 @@ export const Services: CollectionConfig = {
       },
       hooks: {
         beforeValidate: [
-          ({ value, data }) => {
+          ({ value, data }: { value?: string; data?: Record<string, string> }) => {
             if (value)
               return value
                 .toLowerCase()
@@ -53,9 +54,18 @@ export const Services: CollectionConfig = {
       required: true,
     },
     {
+      name: 'layout',
+      type: 'blocks',
+      blocks: [Hero, ContentGrid, Stats, CTA, Map, Team, PageHeroBlock, SplitHero, Process, LogoStrip, EnhancedCTA],
+      required: false,
+    },
+    {
       name: 'detailedDescription',
       type: 'richText',
       required: true,
+      admin: {
+        condition: (data: Record<string, unknown>) => !data.layout || (data.layout as unknown[]).length === 0,
+      },
     },
   ],
   timestamps: true,

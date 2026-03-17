@@ -38,6 +38,13 @@ const config: Config = {
       },
       animation: {
         'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+      },
+      transitionDelay: {
+        '100': '100ms',
+        '200': '200ms',
+        '300': '300ms',
+        '400': '400ms',
+        '500': '500ms',
       }
     }
   },
