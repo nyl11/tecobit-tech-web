@@ -1,6 +1,6 @@
 import React from 'react'
 import { Media } from '@/components/Media'
-import type { Page, Media as MediaType, TeamMember } from '@/payload-types'
+import type { Page, Media as MediaType } from '@/payload-types'
 import { fetchCollection } from '@/utilities/payload-fetch'
 import { Linkedin, Github, Twitter, Facebook, Instagram } from 'lucide-react'
 

@@ -222,6 +222,8 @@ export interface Page {
         stats: {
           value: string;
           label: string;
+          icon?: (string | null) | Media;
+          displayOrder?: number | null;
           id?: string | null;
         }[];
         id?: string | null;
@@ -560,6 +562,8 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     value?: T;
                     label?: T;
+                    icon?: T;
+                    displayOrder?: T;
                     id?: T;
                   };
               id?: T;
