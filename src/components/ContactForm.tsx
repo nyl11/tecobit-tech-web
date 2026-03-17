@@ -1,13 +1,17 @@
 'use client'
 import React, { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 type ContactFormProps = {
   services: { title: string; id: string }[]
 }
 
 export const ContactForm = ({ services }: ContactFormProps) => {
+  const searchParams = useSearchParams()
+  const preSelectedService = searchParams.get('service') || ''
+
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', serviceNeeded: '', message: '' })
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', serviceNeeded: preSelectedService, message: '' })
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
