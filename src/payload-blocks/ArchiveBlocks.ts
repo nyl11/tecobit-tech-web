@@ -124,6 +124,16 @@ export const Stats: Block = {
           type: 'text',
           required: true,
         },
+        {
+          name: 'icon',
+          type: 'upload',
+          relationTo: 'media',
+        },
+        {
+          name: 'displayOrder',
+          type: 'number',
+          defaultValue: 0,
+        },
       ],
     },
   ],

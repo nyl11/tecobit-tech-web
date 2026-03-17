@@ -3,6 +3,14 @@ import { withPayload } from '@payloadcms/next/withPayload'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Your Next.js config here
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'minio-gog4wg400cosw048og88csko.tecobit.cloud',
+      },
+    ],
+  },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],

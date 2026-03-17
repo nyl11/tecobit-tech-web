@@ -26,10 +26,32 @@ export const metadata = {
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
-  // Using our fetchGlobal helper to fetch using the Payload REST API with Next.js caching
-  const headerData = await fetchGlobal('header')
-  const footerData = await fetchGlobal('footer')
-  const siteSettings = await fetchGlobal('site-settings')
+  // Robust data fetching with fallbacks to ensure the site shell renders even if CMS is offline
+  let headerData = null
+  let footerData = null
+  let siteSettings = null
+
+  try {
+    const [header, footer, settings] = await Promise.all([
+      fetchGlobal('header').catch((err) => {
+        console.error('Failed to fetch header:', err)
+        return null
+      }),
+      fetchGlobal('footer').catch((err) => {
+        console.error('Failed to fetch footer:', err)
+        return null
+      }),
+      fetchGlobal('site-settings').catch((err) => {
+        console.error('Failed to fetch site-settings:', err)
+        return null
+      }),
+    ])
+    headerData = header
+    footerData = footer
+    siteSettings = settings
+  } catch (error) {
+    console.error('Unexpected error in RootLayout data fetching:', error)
+  }
 
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
