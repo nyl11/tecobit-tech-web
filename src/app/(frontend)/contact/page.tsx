@@ -26,7 +26,9 @@ export default async function ContactPage() {
         <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
           <Reveal>
             <div className="text-center mb-16">
-              <h1 className="text-4xl md:text-5xl font-heading font-bold text-heading">Contact Us</h1>
+              <h1 className="text-4xl md:text-5xl font-heading font-bold text-heading">
+                Contact Us
+              </h1>
               <div className="w-24 h-1 bg-primary mx-auto mt-6 rounded-full" />
             </div>
 
@@ -44,9 +46,11 @@ export default async function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             {/* Left Column: Info */}
             <Reveal>
-              <div>
+              <div className="ml-10">
                 <div className="mb-10">
-                  <h2 className="text-3xl md:text-5xl font-bold text-[#0A2647] mb-4">Get In Touch</h2>
+                  <h2 className="text-3xl md:text-5xl font-bold text-[#0A2647] mb-4">
+                    Get In Touch
+                  </h2>
                 </div>
                 <p className="text-slate-500 text-lg mb-12 max-w-md leading-relaxed">
                   We are always open to discuss your projects, improve your online presence or help
@@ -102,10 +106,10 @@ export default async function ContactPage() {
 
       {/* Map Section */}
       <Reveal>
-        <MapBlock 
-          address={contactInfo?.address || 'Kathmandu, Nepal'} 
-          zoom={15} 
-          height="450px" 
+        <MapBlock
+          address={contactInfo?.address || 'Kathmandu, Nepal'}
+          zoom={15}
+          height="450px"
           blockType="map"
         />
       </Reveal>
