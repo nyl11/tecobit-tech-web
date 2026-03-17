@@ -37,6 +37,41 @@ export const ContentGrid: Block = {
       type: 'text',
     },
     {
+      name: 'subtitle',
+      type: 'textarea',
+    },
+    {
+      name: 'layout',
+      type: 'select',
+      defaultValue: 'grid',
+      options: [
+        { label: 'Grid', value: 'grid' },
+        { label: 'Columns (2 Col)', value: 'columns' },
+      ],
+    },
+    {
+      name: 'itemStyle',
+      type: 'select',
+      defaultValue: 'card',
+      options: [
+        { label: 'Card with Icon', value: 'card' },
+        { label: 'Simple with Checkmark', value: 'simple' },
+      ],
+    },
+    {
+      name: 'columns',
+      type: 'select',
+      defaultValue: '3',
+      options: [
+        { label: '2 Columns', value: '2' },
+        { label: '3 Columns', value: '3' },
+        { label: '4 Columns', value: '4' },
+      ],
+      admin: {
+        condition: (_, siblingData) => siblingData.layout === 'grid',
+      },
+    },
+    {
       name: 'populateFrom',
       type: 'select',
       defaultValue: 'manual',
@@ -281,6 +316,152 @@ export const PageHero: Block = {
       type: 'checkbox',
       defaultValue: true,
       label: 'Show Decorative Blur Element',
+    },
+  ],
+}
+
+export const SplitHero: Block = {
+  slug: 'splitHero',
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'subtitle',
+      type: 'textarea',
+    },
+    {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+    },
+    {
+      name: 'ctaLabel',
+      type: 'text',
+    },
+    {
+      name: 'ctaLink',
+      type: 'text',
+    },
+  ],
+}
+
+export const Process: Block = {
+  slug: 'process',
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'subtitle',
+      type: 'textarea',
+    },
+    {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+    },
+    {
+      name: 'steps',
+      type: 'array',
+      required: true,
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'content',
+          type: 'textarea',
+          required: true,
+        },
+        {
+          name: 'icon',
+          type: 'upload',
+          relationTo: 'media',
+        },
+      ],
+    },
+  ],
+}
+
+export const LogoStrip: Block = {
+  slug: 'logoStrip',
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+    },
+    {
+      name: 'subtitle',
+      type: 'textarea',
+    },
+    {
+      name: 'logos',
+      type: 'array',
+      required: true,
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+      ],
+    },
+  ],
+}
+
+export const EnhancedCTA: Block = {
+  slug: 'enhancedCTA',
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'subtitle',
+      type: 'textarea',
+    },
+    {
+      name: 'buttonLabel',
+      type: 'text',
+    },
+    {
+      name: 'buttonLink',
+      type: 'text',
+    },
+    {
+      name: 'benefits',
+      type: 'array',
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+        },
+      ],
+    },
+    {
+      name: 'stats',
+      type: 'array',
+      fields: [
+        {
+          name: 'value',
+          type: 'text',
+        },
+        {
+          name: 'label',
+          type: 'text',
+        },
+      ],
     },
   ],
 }

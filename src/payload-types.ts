@@ -201,6 +201,10 @@ export interface Page {
       }
     | {
         title?: string | null;
+        subtitle?: string | null;
+        layout?: ('grid' | 'columns') | null;
+        itemStyle?: ('card' | 'simple') | null;
+        columns?: ('2' | '3' | '4') | null;
         /**
          * Choose whether to manually input items or pull them automatically from Services.
          */
@@ -288,6 +292,63 @@ export interface Page {
         blockName?: string | null;
         blockType: 'pageHero';
       }
+    | {
+        title: string;
+        subtitle?: string | null;
+        image: string | Media;
+        ctaLabel?: string | null;
+        ctaLink?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'splitHero';
+      }
+    | {
+        title: string;
+        subtitle?: string | null;
+        image: string | Media;
+        steps: {
+          title: string;
+          content: string;
+          icon?: (string | null) | Media;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'process';
+      }
+    | {
+        title?: string | null;
+        subtitle?: string | null;
+        logos: {
+          image: string | Media;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'logoStrip';
+      }
+    | {
+        title: string;
+        subtitle?: string | null;
+        buttonLabel?: string | null;
+        buttonLink?: string | null;
+        benefits?:
+          | {
+              label?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        stats?:
+          | {
+              value?: string | null;
+              label?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'enhancedCTA';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -302,7 +363,171 @@ export interface Service {
   slug?: string | null;
   icon?: (string | null) | Media;
   shortDescription: string;
-  detailedDescription: {
+  layout?:
+    | (
+        | {
+            title: string;
+            subtitle?: string | null;
+            backgroundImage?: (string | null) | Media;
+            ctaLabel?: string | null;
+            ctaLink?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            title?: string | null;
+            subtitle?: string | null;
+            layout?: ('grid' | 'columns') | null;
+            itemStyle?: ('card' | 'simple') | null;
+            columns?: ('2' | '3' | '4') | null;
+            /**
+             * Choose whether to manually input items or pull them automatically from Services.
+             */
+            populateFrom?: ('manual' | 'services') | null;
+            items?:
+              | {
+                  title: string;
+                  content: string;
+                  icon?: (string | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contentGrid';
+          }
+        | {
+            title?: string | null;
+            stats: {
+              value: string;
+              label: string;
+              icon?: (string | null) | Media;
+              displayOrder?: number | null;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
+          }
+        | {
+            title: string;
+            description?: string | null;
+            buttonLabel: string;
+            buttonLink: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+        | {
+            title?: string | null;
+            address: string;
+            zoom?: number | null;
+            /**
+             * Height of the map (e.g., 450px, 60vh)
+             */
+            height?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'map';
+          }
+        | {
+            title: string;
+            subtitle?: string | null;
+            /**
+             * Choose whether to manually select members or pull all from the Team collection.
+             */
+            populateFrom?: ('manual' | 'team') | null;
+            members?:
+              | {
+                  name: string;
+                  position: string;
+                  image: string | Media;
+                  socialLinks?:
+                    | {
+                        platform: 'linkedin' | 'github' | 'twitter' | 'facebook' | 'instagram';
+                        url: string;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'team';
+          }
+        | {
+            eyebrow?: string | null;
+            title: string;
+            subtitle?: string | null;
+            theme?: ('slate' | 'white' | 'light') | null;
+            align?: ('left' | 'center') | null;
+            showBlur?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pageHero';
+          }
+        | {
+            title: string;
+            subtitle?: string | null;
+            image: string | Media;
+            ctaLabel?: string | null;
+            ctaLink?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'splitHero';
+          }
+        | {
+            title: string;
+            subtitle?: string | null;
+            image: string | Media;
+            steps: {
+              title: string;
+              content: string;
+              icon?: (string | null) | Media;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'process';
+          }
+        | {
+            title?: string | null;
+            subtitle?: string | null;
+            logos: {
+              image: string | Media;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'logoStrip';
+          }
+        | {
+            title: string;
+            subtitle?: string | null;
+            buttonLabel?: string | null;
+            buttonLink?: string | null;
+            benefits?:
+              | {
+                  label?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            stats?:
+              | {
+                  value?: string | null;
+                  label?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'enhancedCTA';
+          }
+      )[]
+    | null;
+  detailedDescription?: {
     root: {
       type: string;
       children: {
@@ -316,7 +541,7 @@ export interface Service {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -356,6 +581,7 @@ export interface ContactSubmission {
   id: string;
   name: string;
   email: string;
+  phone?: string | null;
   serviceNeeded?: string | null;
   message: string;
   updatedAt: string;
@@ -541,6 +767,10 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
+              subtitle?: T;
+              layout?: T;
+              itemStyle?: T;
+              columns?: T;
               populateFrom?: T;
               items?:
                 | T
@@ -625,6 +855,71 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        splitHero?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              image?: T;
+              ctaLabel?: T;
+              ctaLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        process?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              image?: T;
+              steps?:
+                | T
+                | {
+                    title?: T;
+                    content?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        logoStrip?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              logos?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        enhancedCTA?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              buttonLabel?: T;
+              buttonLink?: T;
+              benefits?:
+                | T
+                | {
+                    label?: T;
+                    id?: T;
+                  };
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -638,6 +933,178 @@ export interface ServicesSelect<T extends boolean = true> {
   slug?: T;
   icon?: T;
   shortDescription?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              backgroundImage?: T;
+              ctaLabel?: T;
+              ctaLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contentGrid?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              layout?: T;
+              itemStyle?: T;
+              columns?: T;
+              populateFrom?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    content?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              title?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    icon?: T;
+                    displayOrder?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              buttonLabel?: T;
+              buttonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        map?:
+          | T
+          | {
+              title?: T;
+              address?: T;
+              zoom?: T;
+              height?: T;
+              id?: T;
+              blockName?: T;
+            };
+        team?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              populateFrom?: T;
+              members?:
+                | T
+                | {
+                    name?: T;
+                    position?: T;
+                    image?: T;
+                    socialLinks?:
+                      | T
+                      | {
+                          platform?: T;
+                          url?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        pageHero?:
+          | T
+          | {
+              eyebrow?: T;
+              title?: T;
+              subtitle?: T;
+              theme?: T;
+              align?: T;
+              showBlur?: T;
+              id?: T;
+              blockName?: T;
+            };
+        splitHero?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              image?: T;
+              ctaLabel?: T;
+              ctaLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        process?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              image?: T;
+              steps?:
+                | T
+                | {
+                    title?: T;
+                    content?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        logoStrip?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              logos?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        enhancedCTA?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              buttonLabel?: T;
+              buttonLink?: T;
+              benefits?:
+                | T
+                | {
+                    label?: T;
+                    id?: T;
+                  };
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
   detailedDescription?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -662,6 +1129,7 @@ export interface PortfolioSelect<T extends boolean = true> {
 export interface ContactSubmissionsSelect<T extends boolean = true> {
   name?: T;
   email?: T;
+  phone?: T;
   serviceNeeded?: T;
   message?: T;
   updatedAt?: T;
@@ -737,7 +1205,16 @@ export interface SiteSetting {
   contactInfo: {
     email: string;
     phone: string;
+    address: string;
+    instagram?: string | null;
   };
+  socialLinks?:
+    | {
+        platform: 'facebook' | 'twitter' | 'instagram' | 'youtube' | 'linkedin';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   seo?: {
     title?: string | null;
     description?: string | null;
@@ -799,6 +1276,15 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         email?: T;
         phone?: T;
+        address?: T;
+        instagram?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
       };
   seo?:
     | T

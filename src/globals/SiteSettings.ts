@@ -31,6 +31,38 @@ export const SiteSettings: GlobalConfig = {
           type: 'text',
           required: true,
         },
+        {
+          name: 'address',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'instagram',
+          type: 'text',
+        },
+      ],
+    },
+    {
+      name: 'socialLinks',
+      type: 'array',
+      fields: [
+        {
+          name: 'platform',
+          type: 'select',
+          options: [
+            { label: 'Facebook', value: 'facebook' },
+            { label: 'Twitter', value: 'twitter' },
+            { label: 'Instagram', value: 'instagram' },
+            { label: 'YouTube', value: 'youtube' },
+            { label: 'LinkedIn', value: 'linkedin' },
+          ],
+          required: true,
+        },
+        {
+          name: 'url',
+          type: 'text',
+          required: true,
+        },
       ],
     },
     {

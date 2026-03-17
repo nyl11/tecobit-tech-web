@@ -6,7 +6,12 @@ import { CompanyStatsBlock } from './CompanyStatsBlock'
 import { MapBlock } from './MapBlock'
 import { TeamBlock } from './TeamBlock'
 import { PageHeroBlock } from './PageHeroBlock'
+import { SplitHeroBlock } from './SplitHeroBlock'
+import { ProcessBlock } from './ProcessBlock'
+import { LogoStripBlock } from './LogoStripBlock'
+import { EnhancedCtaBlock } from './EnhancedCtaBlock'
 import type { Page } from '@/payload-types'
+import { Reveal } from '@/components/Reveal'
 
 export const RenderBlocks = ({ layout }: { layout: Page['layout'] }) => {
   if (!layout || layout.length === 0) return null
@@ -14,24 +19,53 @@ export const RenderBlocks = ({ layout }: { layout: Page['layout'] }) => {
   return (
     <div className="w-full flex flex-col">
       {layout.map((block, index) => {
+        let blockComponent = null
+
         switch (block.blockType) {
           case 'hero':
-            return <HeroBlock key={index} {...block} />
+            blockComponent = <HeroBlock {...block} />
+            break
           case 'contentGrid':
-            return <ContentGridBlock key={index} {...block} />
+            blockComponent = <ContentGridBlock {...block} />
+            break
           case 'stats':
-            return <CompanyStatsBlock key={index} {...block} />
+            blockComponent = <CompanyStatsBlock {...block} />
+            break
           case 'cta':
-            return <CtaBlock key={index} {...block} />
+            blockComponent = <CtaBlock {...block} />
+            break
           case 'map':
-            return <MapBlock key={index} {...block} />
+            blockComponent = <MapBlock {...block} />
+            break
           case 'team':
-            return <TeamBlock key={index} {...block} />
+            blockComponent = <TeamBlock {...block} />
+            break
           case 'pageHero':
-            return <PageHeroBlock key={index} {...block} />
+            blockComponent = <PageHeroBlock {...block} />
+            break
+          case 'splitHero':
+            blockComponent = <SplitHeroBlock {...block} />
+            break
+          case 'process':
+            blockComponent = <ProcessBlock {...block} />
+            break
+          case 'logoStrip':
+            blockComponent = <LogoStripBlock {...block} />
+            break
+          case 'enhancedCTA':
+            blockComponent = <EnhancedCtaBlock {...block} />
+            break
           default:
-            return null
+            blockComponent = null
         }
+
+        if (!blockComponent) return null
+
+        return (
+          <Reveal key={index}>
+            {blockComponent}
+          </Reveal>
+        )
       })}
     </div>
   )
