@@ -1,18 +1,37 @@
+'use client'
 import React from 'react'
 import Link from 'next/link'
+import { Media } from '@/components/Media'
 import type { Page } from '@/payload-types'
 import { Reveal } from '@/components/Reveal'
 
 type CtaBlockProps = Extract<NonNullable<Page['layout']>[0], { blockType: 'cta' }>
 
-export const CtaBlock = ({ title, description, buttonLabel, buttonLink }: CtaBlockProps) => {
+export const CtaBlock = ({
+  title,
+  description,
+  buttonLabel,
+  buttonLink,
+  backgroundImage,
+}: CtaBlockProps) => {
   return (
     <section className="relative overflow-hidden py-28 md:py-36 bg-linear-to-br from-background via-white to-background">
+      {backgroundImage && (
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+          <Media
+            resource={backgroundImage}
+            imgClassName="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-background/40" />
+        </div>
+      )}
+
       {/* Decorative blur orbs */}
       <div
         className="absolute -top-32 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none"
         aria-hidden="true"
       />
+
       <div
         className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-primary-light/10 rounded-full blur-3xl pointer-events-none"
         aria-hidden="true"

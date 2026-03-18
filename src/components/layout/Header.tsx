@@ -3,7 +3,13 @@ import Link from 'next/link'
 import { Media } from '@/components/Media'
 import type { SiteSetting, Header as HeaderGlobal } from '@/payload-types'
 
-export const Header = ({ headerData, siteSettings }: { headerData?: HeaderGlobal | null, siteSettings?: SiteSetting | null }) => {
+export const Header = ({
+  headerData,
+  siteSettings,
+}: {
+  headerData?: HeaderGlobal | null
+  siteSettings?: SiteSetting | null
+}) => {
   const logo = siteSettings?.logo
   const companyName = siteSettings?.companyName || 'Tecobit Technology'
 
@@ -29,17 +35,17 @@ export const Header = ({ headerData, siteSettings }: { headerData?: HeaderGlobal
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {headerData?.navLinks?.map((link, i: number) => (
-            <Link 
-              key={i} 
+            <Link
+              key={i}
               href={link.link}
               className="text-sm font-medium text-body hover:text-primary transition-colors"
             >
               {link.label}
             </Link>
           ))}
-          <Link 
+          <Link
             href="/contact"
-            className="hidden lg:flex btn-theme !py-2 !px-5 !text-xs uppercase tracking-widest"
+            className="hidden lg:flex btn-theme py-2! px-5! text-xs! uppercase tracking-widest"
           >
             Get a Quote
           </Link>
@@ -48,7 +54,12 @@ export const Header = ({ headerData, siteSettings }: { headerData?: HeaderGlobal
         {/* Mobile Menu Button */}
         <button className="md:hidden p-2 text-body">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
           </svg>
         </button>
       </div>

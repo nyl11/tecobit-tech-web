@@ -247,6 +247,7 @@ export interface Page {
     | {
         title: string;
         description?: string | null;
+        backgroundImage?: (string | null) | Media;
         buttonLabel: string;
         buttonLink: string;
         id?: string | null;
@@ -441,6 +442,7 @@ export interface Service {
         | {
             title: string;
             description?: string | null;
+            backgroundImage?: (string | null) | Media;
             buttonLabel: string;
             buttonLink: string;
             id?: string | null;
@@ -843,6 +845,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               description?: T;
+              backgroundImage?: T;
               buttonLabel?: T;
               buttonLink?: T;
               id?: T;
@@ -1039,6 +1042,7 @@ export interface ServicesSelect<T extends boolean = true> {
           | {
               title?: T;
               description?: T;
+              backgroundImage?: T;
               buttonLabel?: T;
               buttonLink?: T;
               id?: T;

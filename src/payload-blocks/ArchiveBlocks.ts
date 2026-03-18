@@ -143,6 +143,12 @@ export const CTA: Block = {
       type: 'textarea',
     },
     {
+      name: 'backgroundImage',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+    },
+    {
       name: 'buttonLabel',
       type: 'text',
       required: true,
@@ -270,7 +276,8 @@ export const Team: Block = {
         { label: 'Team Collection', value: 'team' },
       ],
       admin: {
-        description: 'Choose whether to manually select members or pull all from the Team collection.',
+        description:
+          'Choose whether to manually select members or pull all from the Team collection.',
       },
     },
     {
