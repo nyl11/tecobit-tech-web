@@ -1,11 +1,16 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @config "../../../tailwind.config.ts";
 
 @layer base {
   body {
     @apply bg-background text-body font-sans;
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading text-heading;
   }
 
@@ -16,4 +21,27 @@
   .btn-theme:hover {
     @apply bg-transparent text-heading border-heading;
   }
+}
+
+/* Mega Menu specific styles */
+:root {
+  --header-height: 80px;
+}
+
+/* Smooth scrollbar for mega menu */
+.mega-menu-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mega-menu-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mega-menu-scroll::-webkit-scrollbar-thumb {
+  background: rgba(121, 160, 186, 0.3);
+  border-radius: 3px;
+}
+
+.mega-menu-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(121, 160, 186, 0.5);
 }

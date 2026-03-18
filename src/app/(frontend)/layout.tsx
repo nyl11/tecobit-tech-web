@@ -2,7 +2,8 @@ import React from 'react'
 import { Inter, Poppins } from 'next/font/google'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { fetchGlobal } from '@/utilities/payload-fetch'
+import { fetchGlobal, fetchCollection } from '@/utilities/payload-fetch'
+import type { Service, Portfolio } from '@/payload-types'
 import './styles.css'
 
 const inter = Inter({
@@ -30,9 +31,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   let headerData = null
   let footerData = null
   let siteSettings = null
+  let services: Service[] = []
+  let portfolio: Portfolio[] = []
 
   try {
-    const [header, footer, settings] = await Promise.all([
+    const [header, footer, settings, servicesResult, portfolioResult] = await Promise.all([
       fetchGlobal('header').catch((err) => {
         console.error('Failed to fetch header:', err)
         return null
@@ -45,10 +48,29 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         console.error('Failed to fetch site-settings:', err)
         return null
       }),
+      fetchCollection('services', {
+        limit: 20,
+        sort: 'title',
+        depth: 1,
+      }).catch((err) => {
+        console.error('Failed to fetch services:', err)
+        return { docs: [] }
+      }),
+      fetchCollection('portfolio', {
+        limit: 12,
+        sort: '-createdAt',
+        depth: 2,
+      }).catch((err) => {
+        console.error('Failed to fetch portfolio:', err)
+        return { docs: [] }
+      }),
     ])
+
     headerData = header
     footerData = footer
     siteSettings = settings
+    services = servicesResult.docs
+    portfolio = portfolioResult.docs
   } catch (error) {
     console.error('Unexpected error in RootLayout data fetching:', error)
   }
@@ -56,7 +78,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="flex flex-col min-h-screen antialiased bg-background text-body font-sans">
-        <Header headerData={headerData} siteSettings={siteSettings} />
+        <Header
+          headerData={headerData}
+          siteSettings={siteSettings}
+          services={services}
+          portfolio={portfolio}
+        />
         <main className="grow">{children}</main>
         <Footer footerData={footerData} siteSettings={siteSettings} />
       </body>

@@ -588,6 +588,10 @@ export interface Portfolio {
   projectName: string;
   client: string;
   category: (string | Service)[];
+  /**
+   * Name of the Lucide icon to display (e.g., "Laptop", "Smartphone", "Code")
+   */
+  lucideIcon?: string | null;
   featuredImage?: (string | null) | Media;
   projectDetails: {
     root: {
@@ -1176,6 +1180,7 @@ export interface PortfolioSelect<T extends boolean = true> {
   projectName?: T;
   client?: T;
   category?: T;
+  lucideIcon?: T;
   featuredImage?: T;
   projectDetails?: T;
   updatedAt?: T;

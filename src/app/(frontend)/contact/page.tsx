@@ -1,7 +1,7 @@
 import React from 'react'
 import { fetchCollection, fetchGlobal } from '@/utilities/payload-fetch'
 import { ContactForm } from '@/components/ContactForm'
-import { Phone, Mail, MapPin, ChevronRight } from 'lucide-react'
+import { Phone, Mail, MapPin } from 'lucide-react'
 import { MapBlock } from '@/payload-blocks/MapBlock'
 import { Suspense } from 'react'
 

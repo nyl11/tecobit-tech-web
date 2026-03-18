@@ -28,6 +28,14 @@ export const Portfolio: CollectionConfig = {
       hasMany: true,
     },
     {
+      name: 'lucideIcon',
+      type: 'text',
+      required: false,
+      admin: {
+        description: 'Name of the Lucide icon to display (e.g., "Laptop", "Smartphone", "Code")',
+      },
+    },
+    {
       name: 'featuredImage',
       type: 'upload',
       relationTo: 'media',
