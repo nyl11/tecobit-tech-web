@@ -1,7 +1,7 @@
 import React from 'react'
 import { fetchCollection, fetchGlobal } from '@/utilities/payload-fetch'
 import { ContactForm } from '@/components/ContactForm'
-import { Phone, Mail, MapPin } from 'lucide-react'
+import { Phone, Mail, MapPin, ChevronRight } from 'lucide-react'
 import { MapBlock } from '@/payload-blocks/MapBlock'
 import { Suspense } from 'react'
 
@@ -95,7 +95,11 @@ export default async function ContactPage() {
             {/* Right Column: Form */}
             <Reveal delay={200}>
               <div className="relative">
-                <Suspense fallback={<div className="h-[400px] w-full animate-pulse bg-slate-100 rounded-xl" />}>
+                <Suspense
+                  fallback={
+                    <div className="h-[400px] w-full animate-pulse bg-slate-100 rounded-xl" />
+                  }
+                >
                   <ContactForm services={services} />
                 </Suspense>
               </div>

@@ -29,7 +29,6 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
                   </span>
                 )}
               </h1>
-
               {subtitle && (
                 <p className="text-xl text-body font-sans leading-relaxed mb-12 max-w-xl opacity-90">
                   {subtitle}
