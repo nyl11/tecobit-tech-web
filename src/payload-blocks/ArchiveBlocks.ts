@@ -9,6 +9,10 @@ export const Hero: Block = {
       required: true,
     },
     {
+      name: 'highlightedTitle',
+      type: 'text',
+    },
+    {
       name: 'subtitle',
       type: 'textarea',
     },
@@ -19,12 +23,20 @@ export const Hero: Block = {
       required: false,
     },
     {
-      name: 'ctaLabel',
-      type: 'text',
-    },
-    {
-      name: 'ctaLink',
-      type: 'text',
+      name: 'links',
+      type: 'array',
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'url',
+          type: 'text',
+          required: true,
+        },
+      ],
     },
   ],
 }
@@ -106,6 +118,13 @@ export const ContentGrid: Block = {
           type: 'upload',
           relationTo: 'media',
         },
+        {
+          name: 'lucideIcon',
+          type: 'text',
+          admin: {
+            description: 'Lucide icon name (e.g., Sailboat, Phone, Laptop)',
+          },
+        },
       ],
     },
   ],
@@ -178,13 +197,42 @@ export const Map: Block = {
   slug: 'map',
   fields: [
     {
+      name: 'eyebrow',
+      type: 'text',
+      label: 'Eyebrow Badge',
+      admin: {
+        placeholder: 'Our Location',
+      },
+    },
+    {
       name: 'title',
       type: 'text',
+      required: true,
+    },
+    {
+      name: 'locationTitle',
+      type: 'text',
+      label: 'Location Title',
+      defaultValue: 'Visit Us',
     },
     {
       name: 'address',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'hoursTitle',
+      type: 'text',
+      label: 'Hours Title',
+      defaultValue: 'Business Hours',
+    },
+    {
+      name: 'hours',
+      type: 'textarea',
+      label: 'Business Hours',
+      admin: {
+        placeholder: 'Mon – Fri: 9:00 AM – 6:00 PM\nSat – Sun: Closed',
+      },
     },
     {
       name: 'zoom',

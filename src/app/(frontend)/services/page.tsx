@@ -13,8 +13,8 @@ export default async function ServicesPage() {
   const { docs: services } = await fetchCollection('services', { limit: 100 })
 
   return (
-    <div className="py-24 bg-background min-h-screen">
-      <div className="container mx-auto px-6">
+    <div className="bg-background min-h-screen">
+      <div className="py-24 container mx-auto px-6">
         <Reveal>
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-heading font-bold text-heading">
@@ -31,16 +31,16 @@ export default async function ServicesPage() {
                 href={`/services/${service.slug}`}
                 className="bg-surface border border-border rounded-xl p-8 block hover:shadow-lg hover:-translate-y-1 transition-all group h-full"
               >
-                <div className="w-16 h-16 mb-6 rounded-2xl bg-primary-light/20 flex items-center justify-center group-hover:bg-primary transition-colors">
-                  <Media resource={service.icon} imgClassName="w-8 h-8 object-contain" />
+                <div className="w-14 h-14 mb-6 rounded-xl bg-primary/5 flex items-center justify-center group-hover:bg-primary transition-all duration-300">
+                  <Media resource={service.icon} imgClassName="w-7 h-7 object-contain transition-all group-hover:brightness-0 group-hover:invert" />
                 </div>
-                <h2 className="text-xl font-heading font-semibold text-heading mb-4">
+                <h2 className="text-xl font-heading font-bold text-heading mb-4 group-hover:text-primary transition-colors">
                   {service.title}
                 </h2>
-                <p className="text-body leading-relaxed mb-6">{service.shortDescription}</p>
-                <div className="text-primary font-medium flex items-center gap-2 group-hover:text-primary-dark transition-colors">
-                  Learn more{' '}
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                <p className="text-muted leading-relaxed mb-6 font-light">{service.shortDescription}</p>
+                <div className="text-primary font-semibold flex items-center gap-2 group-hover:translate-x-1 transition-all">
+                  View Detail{' '}
+                  <span className="">→</span>
                 </div>
               </Link>
             </Reveal>

@@ -43,7 +43,7 @@ export const Hero = ({
         {ctaLabel && ctaLink && (
           <a 
             href={ctaLink}
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-500/30"
+            className="inline-block bg-primary hover:bg-primary/90 text-white font-semibold py-4 px-8 rounded-none transition-all duration-300 transform active:scale-95 shadow-md shadow-primary/20"
           >
             {ctaLabel}
           </a>

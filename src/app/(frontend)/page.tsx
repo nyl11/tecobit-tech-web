@@ -31,11 +31,14 @@ export default async function HomePage() {
       {page ? (
         <RenderBlocks layout={page.layout} />
       ) : (
-        <div className="flex flex-col items-center justify-center pt-32 pb-20">
-          <h1 className="text-3xl font-heading mb-4 text-heading">Welcome to Tecobit</h1>
-          <p className="text-body">
-            Please create a &quot;home&quot; page in the CMS to see dynamic content here.
-          </p>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-6">
+          <div className="max-w-md">
+            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-heading">Welcome to Tecobit</h1>
+            <p className="text-muted font-light leading-relaxed mb-10">
+              Your premium digital experience starts here. Please create a &quot;home&quot; page in the CMS to begin showcasing your dynamic content.
+            </p>
+            <div className="w-24 h-1 bg-primary/20 mx-auto rounded-full" />
+          </div>
         </div>
       )}
     </article>

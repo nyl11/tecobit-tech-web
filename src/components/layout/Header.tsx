@@ -39,7 +39,7 @@ export const Header = ({ headerData, siteSettings }: { headerData?: HeaderGlobal
           ))}
           <Link 
             href="/contact"
-            className="hidden lg:flex bg-primary text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors"
+            className="hidden lg:flex btn-theme !py-2 !px-5 !text-xs uppercase tracking-widest"
           >
             Get a Quote
           </Link>

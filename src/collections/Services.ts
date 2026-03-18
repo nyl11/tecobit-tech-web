@@ -49,6 +49,14 @@ export const Services: CollectionConfig = {
       required: false,
     },
     {
+      name: 'lucideIcon',
+      type: 'text',
+      admin: {
+        description: 'Lucide icon name (e.g., Sailboat, Phone, Laptop)',
+      },
+      required: false,
+    },
+    {
       name: 'shortDescription',
       type: 'textarea',
       required: true,

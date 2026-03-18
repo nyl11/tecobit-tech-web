@@ -62,9 +62,9 @@ export const RenderBlocks = ({ layout }: { layout: Page['layout'] }) => {
         if (!blockComponent) return null
 
         return (
-          <Reveal key={index}>
+          <React.Fragment key={index}>
             {blockComponent}
-          </Reveal>
+          </React.Fragment>
         )
       })}
     </div>
