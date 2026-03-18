@@ -11,7 +11,6 @@ import { ProcessBlock } from './ProcessBlock'
 import { LogoStripBlock } from './LogoStripBlock'
 import { EnhancedCtaBlock } from './EnhancedCtaBlock'
 import type { Page } from '@/payload-types'
-import { Reveal } from '@/components/Reveal'
 
 export const RenderBlocks = ({ layout }: { layout: Page['layout'] }) => {
   if (!layout || layout.length === 0) return null
@@ -62,9 +61,9 @@ export const RenderBlocks = ({ layout }: { layout: Page['layout'] }) => {
         if (!blockComponent) return null
 
         return (
-          <Reveal key={index}>
+          <React.Fragment key={index}>
             {blockComponent}
-          </Reveal>
+          </React.Fragment>
         )
       })}
     </div>

@@ -28,7 +28,7 @@ export const ProcessBlock: React.FC<ProcessBlockProps> = ({
                 {Array.isArray(steps) && steps.map((step: { title: string; content: string; icon?: string | import('@/payload-types').Media | null; id?: string | null }, index: number) => (
                   <Reveal key={index} delay={index * 100}>
                     <div className="flex gap-6 group">
-                      <div className="shrink-0 w-12 h-12 rounded-full bg-background border border-border shadow-sm flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                      <div className="shrink-0 w-12 h-12 rounded-xl bg-background border border-border/40 shadow-sm flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
                         {step.icon ? (
                           <Media resource={step.icon} imgClassName="w-6 h-6 object-contain" />
                         ) : (
@@ -49,7 +49,7 @@ export const ProcessBlock: React.FC<ProcessBlockProps> = ({
           </div>
           <div className="w-full md:w-1/2">
             <Reveal delay={300}>
-              <div className="rounded-3xl overflow-hidden shadow-xl border border-border bg-surface aspect-4/5 relative">
+              <div className="rounded-xl overflow-hidden shadow-lg border border-border/30 bg-surface aspect-4/5 relative">
                 <Media resource={image} imgClassName="w-full h-full object-cover" />
               </div>
             </Reveal>

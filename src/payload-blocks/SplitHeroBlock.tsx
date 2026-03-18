@@ -11,7 +11,7 @@ export const SplitHeroBlock: React.FC<SplitHeroBlockProps> = ({
   title, subtitle, image, ctaLabel, ctaLink 
 }) => {
   return (
-    <section className="py-20 bg-background overflow-hidden">
+    <section className="py-24 bg-background overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
           <div className="w-full md:w-1/2">
@@ -27,7 +27,7 @@ export const SplitHeroBlock: React.FC<SplitHeroBlockProps> = ({
               {ctaLabel && ctaLink && (
                 <Link 
                   href={ctaLink}
-                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-white hover:bg-primary-dark transition-all rounded-full font-medium text-lg shadow-lg hover:-translate-y-1"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-white hover:bg-primary/90 transition-all rounded-none font-semibold text-lg shadow-md shadow-primary/20 active:scale-95"
                 >
                   {ctaLabel}
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -39,7 +39,7 @@ export const SplitHeroBlock: React.FC<SplitHeroBlockProps> = ({
           </div>
           <div className="w-full md:w-1/2 relative">
             <Reveal delay={200}>
-              <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-border/50 bg-surface">
+              <div className="relative z-10 rounded-xl overflow-hidden shadow-xl border border-border/30 bg-surface">
                 <Media resource={image} imgClassName="w-full h-auto aspect-[4/3] object-cover" />
               </div>
               {/* Decorative elements */}

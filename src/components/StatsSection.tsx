@@ -30,13 +30,13 @@ export const StatsSection = ({ stats }: { stats: StatItem[] }) => {
   const sortedStats = [...stats].sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0))
 
   return (
-    <section ref={sectionRef} className="pb-20 pt-0 bg-heading text-white">
+    <section ref={sectionRef} className="py-16 bg-heading text-white">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {sortedStats.map((stat, idx) => (
             <div
               key={stat.id}
-              className="text-center group hover:-translate-y-2 transition-transform duration-300"
+              className="text-center group hover:-translate-y-1 transition-transform duration-300"
             >
               {stat.icon && (
                 <div
@@ -45,12 +45,12 @@ export const StatsSection = ({ stats }: { stats: StatItem[] }) => {
                 >
                   <Media
                     resource={stat.icon}
-                    imgClassName="w-10 h-10 object-contain filter brightness-0 invert drop-shadow-md"
+                    imgClassName="w-10 h-10 object-contain filter brightness-0 invert drop-shadow-sm"
                   />
                 </div>
               )}
               <div
-                className={`text-4xl md:text-5xl font-heading font-bold text-primary-light mb-2 opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
+                className={`text-4xl md:text-5xl font-heading font-bold text-primary mb-2 opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
                 style={{ animationDelay: `${idx * 100 + 100}ms`, animationFillMode: 'forwards' }}
               >
                 {stat.value}

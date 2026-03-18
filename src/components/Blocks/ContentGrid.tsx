@@ -4,39 +4,39 @@ import Image from 'next/image'
 
 export const ContentGrid = ({ title, items }: any) => {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-background">
       <div className="container mx-auto px-6">
         {title && (
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{title}</h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-heading mb-6">{title}</h2>
+            <div className="w-24 h-1 bg-primary mx-auto rounded-full"></div>
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {items?.map((item: any, index: number) => {
             const iconUrl = typeof item.icon === 'object' ? item.icon?.url : item.icon
 
             return (
               <div 
                 key={index} 
-                className="bg-white rounded-2xl p-8 pb-10 shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group"
+                className="bg-surface rounded-xl p-8 pb-10 shadow-sm border border-border/40 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group"
               >
                 {iconUrl && (
-                  <div className="w-16 h-16 rounded-xl bg-blue-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-14 h-14 rounded-xl bg-primary/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 group-hover:bg-primary group-hover:text-white">
                     <Image 
                       src={iconUrl} 
                       alt={item.title || 'Icon'} 
-                      width={32} 
-                      height={32} 
-                      className="object-contain"
+                      width={28} 
+                      height={28} 
+                      className="object-contain transition-all"
                     />
                   </div>
                 )}
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-2xl font-heading font-bold text-heading mb-4 group-hover:text-primary transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-muted leading-relaxed font-light">
                   {item.content}
                 </p>
               </div>

@@ -3,7 +3,6 @@ import { fetchCollection } from '@/utilities/payload-fetch'
 import { notFound } from 'next/navigation'
 import { RichText } from '@/components/RichText'
 import { Media } from '@/components/Media'
-import Link from 'next/link'
 
 export async function generateStaticParams() {
   try {
@@ -46,11 +45,8 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
   const categories = item.category?.map(c => typeof c === 'string' ? '' : c.title).filter(Boolean)
 
   return (
-    <div className="py-24 bg-background min-h-screen">
-      <div className="container mx-auto px-6 max-w-5xl">
-        <Link href="/portfolio" className="text-primary hover:text-primary-dark font-medium mb-8 inline-flex items-center gap-2">
-          <span>←</span> Back to Portfolio
-        </Link>
+    <div className="bg-background min-h-screen">
+      <div className="py-20 container mx-auto px-6 max-w-5xl">
         
         <Reveal>
           <div className="mb-12">
@@ -59,13 +55,15 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
             </h1>
             <div className="flex flex-wrap gap-4 items-center text-muted font-sans">
               {item.client && (
-                <div className="bg-surface border border-border px-4 py-2 rounded-full text-sm">
-                  <span className="font-semibold text-heading mr-2">Client:</span> {item.client}
+                <div className="bg-surface border border-border/40 px-5 py-2.5 rounded-none text-xs tracking-wider uppercase font-bold">
+                  <span className="text-primary mr-2">Client:</span> 
+                  <span className="text-heading">{item.client}</span>
                 </div>
               )}
               {categories && categories.length > 0 && (
-                <div className="bg-surface border border-border px-4 py-2 rounded-full text-sm">
-                  <span className="font-semibold text-heading mr-2">Categories:</span> {categories.join(', ')}
+                <div className="bg-surface border border-border/40 px-5 py-2.5 rounded-none text-xs tracking-wider uppercase font-bold">
+                  <span className="text-primary mr-2">Categories:</span> 
+                  <span className="text-heading">{categories.join(', ')}</span>
                 </div>
               )}
             </div>
@@ -73,13 +71,13 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
         </Reveal>
 
         <Reveal delay={200}>
-          <div className="rounded-2xl overflow-hidden mb-16 shadow-lg border border-border">
+          <div className="rounded-xl overflow-hidden mb-16 shadow-lg border border-border/40">
             <Media resource={item.featuredImage} imgClassName="w-full object-cover max-h-[70vh]" priority />
           </div>
         </Reveal>
 
         <Reveal delay={400}>
-          <div className="bg-surface rounded-2xl p-8 md:p-12 border border-border shadow-sm max-w-4xl mx-auto">
+          <div className="bg-surface rounded-xl p-8 md:p-12 border border-border/40 shadow-sm max-w-4xl mx-auto">
             <RichText data={item.projectDetails} />
           </div>
         </Reveal>

@@ -191,10 +191,16 @@ export interface Page {
   layout: (
     | {
         title: string;
+        highlightedTitle?: string | null;
         subtitle?: string | null;
         backgroundImage?: (string | null) | Media;
-        ctaLabel?: string | null;
-        ctaLink?: string | null;
+        links?:
+          | {
+              label: string;
+              url: string;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'hero';
@@ -214,6 +220,10 @@ export interface Page {
               title: string;
               content: string;
               icon?: (string | null) | Media;
+              /**
+               * Lucide icon name (e.g., Sailboat, Phone, Laptop)
+               */
+              lucideIcon?: string | null;
               id?: string | null;
             }[]
           | null;
@@ -244,8 +254,12 @@ export interface Page {
         blockType: 'cta';
       }
     | {
-        title?: string | null;
+        eyebrow?: string | null;
+        title: string;
+        locationTitle?: string | null;
         address: string;
+        hoursTitle?: string | null;
+        hours?: string | null;
         zoom?: number | null;
         /**
          * Height of the map (e.g., 450px, 60vh)
@@ -362,15 +376,25 @@ export interface Service {
   title: string;
   slug?: string | null;
   icon?: (string | null) | Media;
+  /**
+   * Lucide icon name (e.g., Sailboat, Phone, Laptop)
+   */
+  lucideIcon?: string | null;
   shortDescription: string;
   layout?:
     | (
         | {
             title: string;
+            highlightedTitle?: string | null;
             subtitle?: string | null;
             backgroundImage?: (string | null) | Media;
-            ctaLabel?: string | null;
-            ctaLink?: string | null;
+            links?:
+              | {
+                  label: string;
+                  url: string;
+                  id?: string | null;
+                }[]
+              | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'hero';
@@ -390,6 +414,10 @@ export interface Service {
                   title: string;
                   content: string;
                   icon?: (string | null) | Media;
+                  /**
+                   * Lucide icon name (e.g., Sailboat, Phone, Laptop)
+                   */
+                  lucideIcon?: string | null;
                   id?: string | null;
                 }[]
               | null;
@@ -420,8 +448,12 @@ export interface Service {
             blockType: 'cta';
           }
         | {
-            title?: string | null;
+            eyebrow?: string | null;
+            title: string;
+            locationTitle?: string | null;
             address: string;
+            hoursTitle?: string | null;
+            hours?: string | null;
             zoom?: number | null;
             /**
              * Height of the map (e.g., 450px, 60vh)
@@ -756,10 +788,16 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
+              highlightedTitle?: T;
               subtitle?: T;
               backgroundImage?: T;
-              ctaLabel?: T;
-              ctaLink?: T;
+              links?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -778,6 +816,7 @@ export interface PagesSelect<T extends boolean = true> {
                     title?: T;
                     content?: T;
                     icon?: T;
+                    lucideIcon?: T;
                     id?: T;
                   };
               id?: T;
@@ -812,8 +851,12 @@ export interface PagesSelect<T extends boolean = true> {
         map?:
           | T
           | {
+              eyebrow?: T;
               title?: T;
+              locationTitle?: T;
               address?: T;
+              hoursTitle?: T;
+              hours?: T;
               zoom?: T;
               height?: T;
               id?: T;
@@ -932,6 +975,7 @@ export interface ServicesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   icon?: T;
+  lucideIcon?: T;
   shortDescription?: T;
   layout?:
     | T
@@ -940,10 +984,16 @@ export interface ServicesSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
+              highlightedTitle?: T;
               subtitle?: T;
               backgroundImage?: T;
-              ctaLabel?: T;
-              ctaLink?: T;
+              links?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -962,6 +1012,7 @@ export interface ServicesSelect<T extends boolean = true> {
                     title?: T;
                     content?: T;
                     icon?: T;
+                    lucideIcon?: T;
                     id?: T;
                   };
               id?: T;
@@ -996,8 +1047,12 @@ export interface ServicesSelect<T extends boolean = true> {
         map?:
           | T
           | {
+              eyebrow?: T;
               title?: T;
+              locationTitle?: T;
               address?: T;
+              hoursTitle?: T;
+              hours?: T;
               zoom?: T;
               height?: T;
               id?: T;

@@ -10,12 +10,12 @@ export const LogoStripBlock: React.FC<LogoStripBlockProps> = ({
   title, subtitle, logos 
 }) => {
   return (
-    <section className="py-20 bg-background">
+    <section className="py-16 bg-background">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <Reveal>
             {title && <h2 className="text-3xl font-heading font-bold text-heading mb-4">{title}</h2>}
-            {subtitle && <p className="text-lg text-muted max-w-2xl mx-auto">{subtitle}</p>}
+            {subtitle && <p className="text-lg text-muted max-w-2xl mx-auto font-light">{subtitle}</p>}
           </Reveal>
         </div>
 

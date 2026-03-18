@@ -13,8 +13,8 @@ export default async function PortfolioPage() {
   const { docs: portfolio } = await fetchCollection('portfolio', { limit: 100 })
 
   return (
-    <div className="py-24 bg-surface-alt min-h-screen">
-      <div className="container mx-auto px-6">
+    <div className="bg-background min-h-screen">
+      <div className="py-24 container mx-auto px-6">
         <Reveal>
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-heading font-bold text-heading">Our Portfolio</h1>
@@ -36,13 +36,13 @@ export default async function PortfolioPage() {
                       resource={item.featuredImage} 
                       imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                     />
-                    <div className="absolute inset-0 bg-linear-to-t from-heading/80 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-heading/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
-                  <div className="absolute bottom-0 left-0 w-full p-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                    <span className="text-primary-light text-sm font-semibold uppercase tracking-wider mb-2 block">
+                  <div className="absolute bottom-0 left-0 w-full p-8 text-white transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                    <span className="text-primary-light text-xs font-bold uppercase tracking-[0.2em] mb-3 block">
                       {categoryNames || 'Project'}
                     </span>
-                    <h2 className="text-2xl font-heading font-bold mb-1">
+                    <h2 className="text-2xl md:text-3xl font-heading font-extrabold mb-1">
                       {item.projectName}
                     </h2>
                   </div>
