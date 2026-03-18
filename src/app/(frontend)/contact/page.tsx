@@ -1,5 +1,6 @@
 import React from 'react'
-import { fetchCollection, fetchGlobal } from '@/utilities/payload-fetch'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 import { ContactForm } from '@/components/ContactForm'
 import { Phone, Mail, MapPin } from 'lucide-react'
 import { MapBlock } from '@/payload-blocks/MapBlock'
@@ -12,8 +13,11 @@ export const metadata = {
 import { Reveal } from '@/components/Reveal'
 
 export default async function ContactPage() {
-  const { docs: services } = await fetchCollection('services', { limit: 100 })
-  const settings = await fetchGlobal('site-settings')
+  const payload = await getPayload({ config })
+  const { docs: services } = await payload.find({ collection: 'services', limit: 100 })
+  const settings = await payload.findGlobal({
+    slug: 'site-settings',
+  })
   const { contactInfo, socialLinks: _socialLinks } = settings || {}
 
   return (

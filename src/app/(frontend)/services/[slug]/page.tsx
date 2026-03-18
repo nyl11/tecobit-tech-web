@@ -1,12 +1,14 @@
 import React from 'react'
-import { fetchCollection } from '@/utilities/payload-fetch'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 import { notFound } from 'next/navigation'
 import { RichText } from '@/components/RichText'
 
 export async function generateStaticParams() {
   try {
-    const { docs } = await fetchCollection('services', { limit: 100 })
-    return docs.filter(doc => doc.slug).map(doc => ({ slug: doc.slug }))
+    const payload = await getPayload({ config })
+    const { docs } = await payload.find({ collection: 'services', limit: 100 })
+    return docs.filter((doc) => doc.slug).map((doc) => ({ slug: doc.slug }))
   } catch (_e) {
     return []
   }
@@ -15,16 +17,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   try {
-    const { docs } = await fetchCollection('services', {
+    const payload = await getPayload({ config })
+    const { docs } = await payload.find({
+      collection: 'services',
       where: { slug: { equals: slug } },
-      limit: 1
+      limit: 1,
     })
     const service = docs[0]
     return {
       title: service?.title ? `${service.title} | Services` : 'Service Details',
-      description: service?.shortDescription
+      description: service?.shortDescription,
     }
-  } catch(_e) {
+  } catch (_e) {
     return {}
   }
 }
@@ -35,9 +39,11 @@ import { RenderBlocks } from '@/payload-blocks/RenderBlocks'
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  const { docs } = await fetchCollection('services', {
+  const payload = await getPayload({ config })
+  const { docs } = await payload.find({
+    collection: 'services',
     where: { slug: { equals: slug } },
-    limit: 1
+    limit: 1,
   })
 
   const service = docs[0]
