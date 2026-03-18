@@ -2,7 +2,8 @@ import React from 'react'
 import { Inter, Poppins } from 'next/font/google'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { fetchGlobal, fetchCollection } from '@/utilities/payload-fetch'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 import type { Service, Portfolio } from '@/payload-types'
 import './styles.css'
 
@@ -35,35 +36,54 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   let portfolio: Portfolio[] = []
 
   try {
+    const payload = await getPayload({ config })
     const [header, footer, settings, servicesResult, portfolioResult] = await Promise.all([
-      fetchGlobal('header').catch((err) => {
-        console.error('Failed to fetch header:', err)
-        return null
-      }),
-      fetchGlobal('footer').catch((err) => {
-        console.error('Failed to fetch footer:', err)
-        return null
-      }),
-      fetchGlobal('site-settings').catch((err) => {
-        console.error('Failed to fetch site-settings:', err)
-        return null
-      }),
-      fetchCollection('services', {
-        limit: 20,
-        sort: 'title',
-        depth: 1,
-      }).catch((err) => {
-        console.error('Failed to fetch services:', err)
-        return { docs: [] }
-      }),
-      fetchCollection('portfolio', {
-        limit: 12,
-        sort: '-createdAt',
-        depth: 2,
-      }).catch((err) => {
-        console.error('Failed to fetch portfolio:', err)
-        return { docs: [] }
-      }),
+      payload
+        .findGlobal({
+          slug: 'header',
+        })
+        .catch((err) => {
+          console.error('Failed to fetch header:', err)
+          return null
+        }),
+      payload
+        .findGlobal({
+          slug: 'footer',
+        })
+        .catch((err) => {
+          console.error('Failed to fetch footer:', err)
+          return null
+        }),
+      payload
+        .findGlobal({
+          slug: 'site-settings',
+        })
+        .catch((err) => {
+          console.error('Failed to fetch site-settings:', err)
+          return null
+        }),
+      payload
+        .find({
+          collection: 'services',
+          limit: 20,
+          sort: 'title',
+          depth: 1,
+        })
+        .catch((err) => {
+          console.error('Failed to fetch services:', err)
+          return { docs: [] }
+        }),
+      payload
+        .find({
+          collection: 'portfolio',
+          limit: 12,
+          sort: '-createdAt',
+          depth: 2,
+        })
+        .catch((err) => {
+          console.error('Failed to fetch portfolio:', err)
+          return { docs: [] }
+        }),
     ])
 
     headerData = header

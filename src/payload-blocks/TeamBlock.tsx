@@ -1,7 +1,8 @@
 import React from 'react'
 import { Media } from '@/components/Media'
 import type { Page, Media as MediaType } from '@/payload-types'
-import { fetchCollection } from '@/utilities/payload-fetch'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 import { Linkedin, Github, Twitter, Facebook, Instagram } from 'lucide-react'
 import { Reveal } from '@/components/Reveal'
 
@@ -29,7 +30,9 @@ export const TeamBlock = async ({
   let displayMembers: DisplayMember[] = []
 
   if (populateFrom === 'team') {
-    const { docs: teamMembers } = await fetchCollection('team-members', {
+    const payload = await getPayload({ config })
+    const { docs: teamMembers } = await payload.find({
+      collection: 'team-members',
       limit: 100,
       sort: 'createdAt',
     })
@@ -73,7 +76,9 @@ export const TeamBlock = async ({
               </h2>
             )}
             {subtitle && (
-              <p className="text-xl text-body leading-relaxed max-w-2xl mx-auto font-light">{subtitle}</p>
+              <p className="text-xl text-body leading-relaxed max-w-2xl mx-auto font-light">
+                {subtitle}
+              </p>
             )}
             <div className="w-24 h-1 bg-primary mt-8 rounded-full mx-auto" />
           </div>
@@ -119,7 +124,9 @@ export const TeamBlock = async ({
                     {member.position}
                   </p>
                   {member.bio && (
-                    <p className="text-muted text-sm leading-relaxed mb-6 max-w-xs font-light">{member.bio}</p>
+                    <p className="text-muted text-sm leading-relaxed mb-6 max-w-xs font-light">
+                      {member.bio}
+                    </p>
                   )}
                   <div className="w-8 h-0.5 bg-border/40 group-hover:w-16 group-hover:bg-primary transition-all duration-500" />
                 </div>

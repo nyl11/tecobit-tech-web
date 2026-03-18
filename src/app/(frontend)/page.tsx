@@ -1,11 +1,14 @@
 import React from 'react'
-import { fetchCollection } from '@/utilities/payload-fetch'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 import { RenderBlocks } from '@/payload-blocks/RenderBlocks'
 import type { Metadata } from 'next'
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const { docs } = await fetchCollection('pages', {
+    const payload = await getPayload({ config })
+    const { docs } = await payload.find({
+      collection: 'pages',
       where: { slug: { equals: 'home' } },
       limit: 1,
     })
@@ -19,7 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const { docs: pages } = await fetchCollection('pages', {
+  const payload = await getPayload({ config })
+  const { docs: pages } = await payload.find({
+    collection: 'pages',
     where: { slug: { equals: 'home' } },
     limit: 1,
   })
@@ -33,9 +38,12 @@ export default async function HomePage() {
       ) : (
         <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-6">
           <div className="max-w-md">
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-heading">Welcome to Tecobit</h1>
+            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-heading">
+              Welcome to Tecobit
+            </h1>
             <p className="text-muted font-light leading-relaxed mb-10">
-              Your premium digital experience starts here. Please create a &quot;home&quot; page in the CMS to begin showcasing your dynamic content.
+              Your premium digital experience starts here. Please create a &quot;home&quot; page in
+              the CMS to begin showcasing your dynamic content.
             </p>
             <div className="w-24 h-1 bg-primary/20 mx-auto rounded-full" />
           </div>

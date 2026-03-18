@@ -1,7 +1,8 @@
 import React from 'react'
 import { Media } from '@/components/Media'
 import type { Page, Media as MediaType } from '@/payload-types'
-import { fetchCollection } from '@/utilities/payload-fetch'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 import { Reveal } from '@/components/Reveal'
 import * as LucideIcons from 'lucide-react'
 import { LucideIcon } from 'lucide-react'
@@ -33,7 +34,9 @@ export const ContentGridBlock = async ({
   let displayItems: DisplayItem[] = []
 
   if (populateFrom === 'services') {
-    const { docs: services } = await fetchCollection('services', {
+    const payload = await getPayload({ config })
+    const { docs: services } = await payload.find({
+      collection: 'services',
       limit: 100, // Reasonable limit for services
       sort: 'createdAt',
     })
